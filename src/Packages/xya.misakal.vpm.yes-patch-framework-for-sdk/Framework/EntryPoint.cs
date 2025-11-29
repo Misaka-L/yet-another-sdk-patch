@@ -32,7 +32,7 @@ namespace YesPatchFrameworkForVRChatSdk
                 .Where(group => group.Count() > 1)
                 .Select(group => group.Key)
                 .ToArray();
-            
+
             if (duplicateIds.Length > 0)
             {
                 var duplicateIdsString = string.Join(", ", duplicateIds);
