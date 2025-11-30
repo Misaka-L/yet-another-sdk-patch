@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using UnityEngine;
 using YesPatchFrameworkForVRChatSdk.PatchApi;
+using YesPatchFrameworkForVRChatSdk.Settings.PatchManager;
 
 namespace YesPatchFrameworkForVRChatSdk.PatchManagement;
 
@@ -49,8 +50,13 @@ public sealed class YesPatchManager
 
     private void ApplyPatchesCore(YesPatch[] patches)
     {
+        var settings = YesPatchManagerSettings.GetOrCreateSettings();
+
         foreach (var patch in patches)
         {
+            if (!settings.IsPatchEnabled(patch.Id))
+                continue;
+
             Debug.Log($"[YesPatchFramework] Applying patch: [{patch.Id}] {patch.DisplayName}");
             try
             {
