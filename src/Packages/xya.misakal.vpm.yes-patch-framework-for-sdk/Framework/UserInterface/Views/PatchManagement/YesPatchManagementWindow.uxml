@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<engine:UXML
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:engine="UnityEngine.UIElements"
+    xmlns:editor="UnityEditor.UIElements">
+
+    <Style src="YesPatchManagementWindow.uss" />
+
+    <engine:VisualElement class="patch-management-window-container">
+        <engine:VisualElement class="patch-management-window-left-panel">
+            <engine:ListView name="patches-list-view" />
+        </engine:VisualElement>
+        <engine:VisualElement class="patch-management-window-content-container">
+            <engine:VisualElement class="welcome-page-container">
+                <engine:VisualElement class="welcome-page-content">
+                    <engine:Label class="page-title-text" text="Welcome!" />
+                    <engine:Label text="- Enable or disable patches by toggling the checkbox." />
+                    <engine:Label text="- Change patch settings by selecting a patch from the list on the left." />
+                </engine:VisualElement>
+                <engine:VisualElement class="welcome-page-about">
+                    <engine:Label text="Yes! Patch Framework for VRChat SDK snapshot"/>
+                </engine:VisualElement>
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

@@ -1,0 +1,44 @@
+#patches-list-view {
+    width: 300px;
+}
+
+.patch-management-window-container {
+    display: flex;
+    flex-direction: row;
+
+    height: 100%;
+}
+
+.patch-management-window-left-panel {
+    flex: none;
+    border-right-color: gray;
+    border-right-width: 1px;
+}
+
+.patch-management-window-content-container {
+    flex: 1;
+}
+
+.page-title-text {
+    font-size: 36px;
+    -unity-font-style: bold;
+}
+
+.welcome-page-container {
+    display: flex;
+    height: 100%;
+
+    padding: 14px;
+}
+
+.welcome-page-content {
+    font-size: 14px;
+    flex: 1;
+}
+
+.welcome-page-about {
+    flex: none;
+
+    align-self: flex-end;
+    opacity: 0.8;
+}
