@@ -5,40 +5,38 @@ using UnityEngine.UIElements;
 using YesPatchFrameworkForVRChatSdk.PatchManagement;
 using YesPatchFrameworkForVRChatSdk.UserInterface.Controls.PatchManagement;
 
-public class YesPatchManagementWindow : EditorWindow
+namespace YesPatchFrameworkForVRChatSdk.UserInterface.Views.PatchManagement
 {
-    [SerializeField] private VisualTreeAsset m_VisualTreeAsset = default;
-
-    private readonly YesPatchManager _yesPatchManager;
-
-    public YesPatchManagementWindow()
+    internal class YesPatchManagementWindow : EditorWindow
     {
-        _yesPatchManager = YesPatchManager.Instance;
-    }
+        [SerializeField] private VisualTreeAsset m_VisualTreeAsset = default;
 
-    [MenuItem("Window/Yes! Patch Framework/Patch Management")]
-    public static void ShowExample()
-    {
-        YesPatchManagementWindow wnd = GetWindow<YesPatchManagementWindow>();
-        wnd.titleContent = new GUIContent("Patch Management");
-    }
+        private readonly YesPatchManager _yesPatchManager = YesPatchManager.Instance;
 
-    public void CreateGUI()
-    {
-        var root = rootVisualElement;
-        m_VisualTreeAsset.CloneTree(root);
-
-        var patchesListView = root.Q<ListView>("patches-list-view");
-
-        var patches = _yesPatchManager.Patches.ToList();
-        patchesListView.makeItem = () => new VisualElement();
-        patchesListView.bindItem = (view, index) =>
+        [MenuItem("Window/Yes! Patch Framework/Patch Management")]
+        public static void ShowPatchManagementWindow()
         {
-            var item = new YesPatchListItem(patches[index], _yesPatchManager);
-            view.Add(item);
-        };
+            var window = GetWindow<YesPatchManagementWindow>();
+            window.titleContent = new GUIContent("Patch Management");
+        }
 
-        patchesListView.fixedItemHeight = 50;
-        patchesListView.itemsSource = patches;
+        public void CreateGUI()
+        {
+            var root = rootVisualElement;
+            m_VisualTreeAsset.CloneTree(root);
+
+            var patchesListView = root.Q<ListView>("patches-list-view");
+
+            var patches = _yesPatchManager.Patches.ToList();
+            patchesListView.makeItem = () => new VisualElement();
+            patchesListView.bindItem = (view, index) =>
+            {
+                var item = new YesPatchListItem(patches[index], _yesPatchManager);
+                view.Add(item);
+            };
+
+            patchesListView.fixedItemHeight = 50;
+            patchesListView.itemsSource = patches;
+        }
     }
 }

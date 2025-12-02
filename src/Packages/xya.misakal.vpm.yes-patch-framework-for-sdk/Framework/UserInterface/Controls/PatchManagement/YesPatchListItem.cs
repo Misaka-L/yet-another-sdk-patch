@@ -1,11 +1,10 @@
 ﻿using UnityEditor;
-using UnityEngine;
 using UnityEngine.UIElements;
 using YesPatchFrameworkForVRChatSdk.PatchManagement;
 
 namespace YesPatchFrameworkForVRChatSdk.UserInterface.Controls.PatchManagement;
 
-public sealed class YesPatchListItem : VisualElement
+internal sealed class YesPatchListItem : VisualElement
 {
     private readonly Label patchIdLabel;
     private readonly Label patchDisplayNameLabel;
