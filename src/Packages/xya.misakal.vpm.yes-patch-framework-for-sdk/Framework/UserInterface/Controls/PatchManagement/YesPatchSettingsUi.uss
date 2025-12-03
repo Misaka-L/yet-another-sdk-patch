@@ -1,0 +1,56 @@
+﻿.patch-settings-header-text-container {
+    flex: 1;
+}
+
+#patch-settings-header-display-name {
+    font-size: 24px;
+    -unity-font-style: bold;
+}
+
+#patch-settings-header-description {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+#patch-settings-root-container {
+    display: flex;
+    height: 100%;
+}
+
+.patch-settings-header-container {
+    flex: none;
+
+    padding: 14px;
+
+    border-bottom-color: gray;
+    border-bottom-width: 1px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+#patch-settings-custom-ui-container {
+    flex: 1;
+}
+
+.no-patch-settings-provided-container {
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-patch-settings-provided-icon-text {
+    font-size: 64px;
+    -unity-font-style: bold;
+}
+
+.no-patch-settings-provided-text {
+    font-size: 24px;
+    -unity-font-style: bold;
+}
+
+#patch-settings-enabled-toggle {
+    -unity-font-style: bold;
+}

@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine.UIElements;
 using YesPatchFrameworkForVRChatSdk.Exceptions.Patch;
 using YesPatchFrameworkForVRChatSdk.PatchApi;
 
@@ -14,6 +15,8 @@ public sealed class YesPatch
     public string Description => _instance.Description;
 
     public bool IsDefaultEnabled => _instance.IsDefaultEnabled;
+
+    public bool HasSettingsUi => _instance.HasSettingsUi;
 
     public YesPatchStatus Status { get; private set; } = YesPatchStatus.Instantiated;
     public Exception? LastPatchException { get; private set; }
@@ -82,6 +85,9 @@ public sealed class YesPatch
         _isPatched = false;
         Status = YesPatchStatus.UnPatched;
     }
+
+    public void OnSettingUi() => _instance.OnSettingsUi();
+    public void CreateSettingsUi(VisualElement rootVisualElement) => _instance.CreateSettingsUi(rootVisualElement);
 }
 
 public enum YesPatchStatus

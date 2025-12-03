@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<engine:UXML
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:engine="UnityEngine.UIElements"
+    xmlns:editor="UnityEditor.UIElements">
+
+    <Style src="YesPatchSettingsUi.uss" />
+
+    <engine:VisualElement name="patch-settings-root-container">
+        <engine:VisualElement class="patch-settings-header-container">
+            <engine:VisualElement class="patch-settings-header-text-container">
+                <engine:Label text="Patch Display Name" name="patch-settings-header-display-name" />
+                <engine:Label text="Patch Description" name="patch-settings-header-description" />
+            </engine:VisualElement>
+            <engine:VisualElement>
+                <engine:Toggle name="patch-settings-enabled-toggle" text="Enabled" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+        <engine:VisualElement name="patch-settings-custom-ui-container">
+            <engine:VisualElement class="no-patch-settings-provided-container">
+                <engine:Label class="no-patch-settings-provided-icon-text" text="?" />
+                <engine:Label class="no-patch-settings-provided-text" text="No settings provided for this patch" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

@@ -11,8 +11,8 @@
         <engine:VisualElement class="patch-management-window-left-panel">
             <engine:ListView name="patches-list-view" />
         </engine:VisualElement>
-        <engine:VisualElement class="patch-management-window-content-container">
-            <engine:VisualElement class="welcome-page-container">
+        <engine:VisualElement name="patch-management-content-container" class="patch-management-window-content-container">
+            <engine:VisualElement name="welcome-page-container" class="welcome-page-container">
                 <engine:VisualElement class="welcome-page-content">
                     <engine:Label class="page-title-text" text="Welcome!" />
                     <engine:Label text="- Enable or disable patches by toggling the checkbox." />
