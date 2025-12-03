@@ -28,13 +28,16 @@ public sealed class YesPatchManager
 
         // Print summary
         var totalPatches = patches.Length;
+        var appliedPatches = patches
+            .Where(patch => patch.Status == YesPatchStatus.Patched)
+            .ToArray();
         var failedPatches = patches
             .Where(patch => patch.Status == YesPatchStatus.PatchFailed)
             .ToArray();
 
         var completedMessageBuilder = new StringBuilder();
         completedMessageBuilder.AppendLine(
-            $"[YesPatchFramework] Patch process completed. Total: {totalPatches} Errors: {failedPatches.Length}");
+            $"[YesPatchFramework] Patch process completed. Total: {totalPatches} Patched: {appliedPatches.Length} Errors: {failedPatches.Length}");
 
         if (failedPatches.Length > 0)
         {
