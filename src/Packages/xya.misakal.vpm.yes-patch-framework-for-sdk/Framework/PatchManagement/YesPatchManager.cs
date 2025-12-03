@@ -29,7 +29,7 @@ public sealed class YesPatchManager
         // Print summary
         var totalPatches = patches.Length;
         var failedPatches = patches
-            .Where(patch => patch.Status != YesPatchStatus.Patched)
+            .Where(patch => patch.Status == YesPatchStatus.PatchFailed)
             .ToArray();
 
         var completedMessageBuilder = new StringBuilder();
