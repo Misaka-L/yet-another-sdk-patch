@@ -1,0 +1,25 @@
+{
+    "name": "YetAnotherPatchForVRChatSdk.Worlds",
+    "rootNamespace": "YetAnotherPatchForVRChatSdk.Worlds",
+    "references": [
+        "GUID:c427fdff1390e954e91e12eb67f5cf3e",
+        "GUID:3c1bc1267eab5884ebe7f232c09ee0d9"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "YAP4VRC.Polly.Core.dll",
+        "YPF4VRC.0Harmony.dll",
+        "VRCSDK3.dll",
+        "VRCSDKBase.dll",
+        "VRC.Udon.Common.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
