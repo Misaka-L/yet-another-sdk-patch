@@ -49,7 +49,8 @@ internal sealed class VrcApiHttpClientFactory
 
         var innerHandler = new HttpClientHandler
         {
-            CookieContainer = cookieContainer
+            CookieContainer = cookieContainer,
+            Proxy = new FollowSystemWebProxy()
         };
 
         var handler = new ResilienceHttpHandler(new HttpLoggingHandler(innerHandler));
