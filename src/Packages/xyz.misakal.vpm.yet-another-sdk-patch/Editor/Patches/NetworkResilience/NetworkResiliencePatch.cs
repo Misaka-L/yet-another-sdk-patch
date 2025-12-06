@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Reflection;
+using BestHTTP;
 using HarmonyLib;
 using UnityEngine.UIElements;
 using VRC.Core;
@@ -30,6 +31,8 @@ internal sealed class NetworkResiliencePatch : YesPatchBase
 
     private const string VrcCookieBaseUrlFieldName = "VRC_COOKIE_BASE_URL";
     private static FieldInfo? _vrcCookieBaseUrlFieldInfo;
+
+    private static readonly NetworkResilienceWebProxy NetworkResilienceWebProxy = new();
 
     public override void Patch()
     {
@@ -113,6 +116,21 @@ internal sealed class NetworkResiliencePatch : YesPatchBase
 
         __result = CreateOrGetHttpClientFactory().GetOrCreateClient();
         return false;
+    }
+
+    [HarmonyPatch(typeof(HTTPRequest), nameof(HTTPRequest.Send))]
+    [HarmonyPrefix]
+    private static void HttpRequestSendPrefix(HTTPRequest __instance)
+    {
+        var destinationUrl = __instance.CurrentUri;
+        if (destinationUrl is null)
+            throw new NullReferenceException(nameof(destinationUrl));
+
+        if (__instance.HasProxy || NetworkResilienceWebProxy.IsBypassed(destinationUrl))
+            return;
+
+        var proxyUri = NetworkResilienceWebProxy.GetProxy(destinationUrl);
+        __instance.Proxy = new HTTPProxy(proxyUri);
     }
 
     public override void CreateSettingsUi(VisualElement rootVisualElement)
