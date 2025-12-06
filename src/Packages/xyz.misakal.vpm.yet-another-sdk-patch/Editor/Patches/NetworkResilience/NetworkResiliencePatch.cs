@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Reflection;
+using System.Threading;
 using BestHTTP;
 using HarmonyLib;
 using UnityEngine.UIElements;
@@ -131,6 +132,19 @@ internal sealed class NetworkResiliencePatch : YesPatchBase
 
         var proxyUri = NetworkResilienceWebProxy.GetProxy(destinationUrl);
         __instance.Proxy = new HTTPProxy(proxyUri);
+    }
+
+    [HarmonyPatch(typeof(HttpClient), nameof(HttpClient.Timeout), MethodType.Setter)]
+    [HarmonyPrefix]
+    private static bool HttpClientTimeoutSetterPrefix(HttpClient __instance, TimeSpan value)
+    {
+        // Prevent SDK from setting HttpClient.Timeout
+        if (__instance == _httpClientFactory?.GetOrCreateClient() && value != Timeout.InfiniteTimeSpan)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public override void CreateSettingsUi(VisualElement rootVisualElement)
