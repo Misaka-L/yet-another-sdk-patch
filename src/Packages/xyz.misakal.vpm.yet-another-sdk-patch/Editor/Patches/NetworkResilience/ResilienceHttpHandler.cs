@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Net.Http;
+using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using Polly;
@@ -16,7 +18,11 @@ internal sealed class ResilienceHttpHandler : DelegatingHandler
     {
         var options = new RetryStrategyOptions
         {
-            ShouldHandle = new PredicateBuilder().Handle<HttpRequestException>(),
+            ShouldHandle = new PredicateBuilder()
+                .Handle<HttpRequestException>()
+                .HandleInner<IOException>()
+                .HandleInner<SocketException>()
+                .HandleInner<TimeoutException>(),
             MaxRetryAttempts = 5,
             BackoffType = DelayBackoffType.Exponential,
             UseJitter = true,
@@ -41,7 +47,19 @@ internal sealed class ResilienceHttpHandler : DelegatingHandler
         CancellationToken cancellationToken)
     {
         return _pipeline.ExecuteAsync(
-                async token => await base.SendAsync(request, token),
+                async token =>
+                {
+                    try
+                    {
+                        return await base.SendAsync(request, token);
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.LogWarning("Http Request failed: " + ex);
+                        Debug.LogException(ex);
+                        throw;
+                    }
+                },
                 cancellationToken)
             .AsTask();
     }
