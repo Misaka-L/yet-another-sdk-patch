@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - \[BREAKING CHANGE\] All Patches are enabled by default. [`#7`](https://github.com/project-vrcz/yet-another-sdk-patch/pull/7)
 - \[BREAKING CHANGE\] Patch failed won't disable patch now. [`#7`](https://github.com/project-vrcz/yet-another-sdk-patch/pull/7)
+- Use GUID instead of Path to load UXML asset. [`#12`](https://github.com/project-vrcz/yet-another-sdk-patch/pull/12)
 
 ## [0.1.0-beta.1] - 2025-12-06
 
