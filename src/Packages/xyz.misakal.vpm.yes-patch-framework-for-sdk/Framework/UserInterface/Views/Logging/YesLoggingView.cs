@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 using YesPatchFrameworkForVRChatSdk.Logging;
+using YesPatchFrameworkForVRChatSdk.PatchApi.Logging;
 using YesPatchFrameworkForVRChatSdk.UserInterface.Controls.Logging;
 
 namespace YesPatchFrameworkForVRChatSdk.UserInterface.Views.Logging;
@@ -10,11 +13,20 @@ namespace YesPatchFrameworkForVRChatSdk.UserInterface.Views.Logging;
 internal sealed class YesLoggingView : VisualElement
 {
     private readonly List<YesLogEntity> _logEntries = YesFrameworkLogger.Instance.GetLogEntities();
+    private readonly List<YesLogEntity> _filteredLogEntries = new();
 
     private readonly ListView _logListView;
 
     private readonly Button _pingSelectedLogEntityContextButton;
     private readonly TextField _selectedLogDetailsTextField;
+
+    private readonly TextField _searchKeywordField;
+    private readonly ToolbarToggle _traceLevelFilterToggle;
+    private readonly ToolbarToggle _debugLevelFilterToggle;
+    private readonly ToolbarToggle _infoLevelFilterToggle;
+    private readonly ToolbarToggle _warningLevelFilterToggle;
+    private readonly ToolbarToggle _errorLevelFilterToggle;
+    private readonly ToolbarToggle _criticalLevelFilterToggle;
 
     private YesLogEntity? _selectedLogEntity;
 
@@ -38,7 +50,7 @@ internal sealed class YesLoggingView : VisualElement
             EditorGUIUtility.PingObject(_selectedLogEntity.Context);
         };
 
-        _logListView.itemsSource = _logEntries;
+        _logListView.itemsSource = _filteredLogEntries;
         _logListView.makeItem = () => new VisualElement();
         _logListView.bindItem = (element, i) =>
         {
@@ -69,6 +81,60 @@ internal sealed class YesLoggingView : VisualElement
         };
 
         _logListView.fixedItemHeight = 50;
+
+        _searchKeywordField = this.Q<TextField>("logging-filter-keyword-field");
+        _searchKeywordField.RegisterValueChangedCallback(_ => UpdateFilteredLogEntries());
+
+        _traceLevelFilterToggle = this.Q<ToolbarToggle>("trace-filter-toggle");
+        _debugLevelFilterToggle = this.Q<ToolbarToggle>("debug-filter-toggle");
+        _infoLevelFilterToggle = this.Q<ToolbarToggle>("info-filter-toggle");
+        _warningLevelFilterToggle = this.Q<ToolbarToggle>("warning-filter-toggle");
+        _errorLevelFilterToggle = this.Q<ToolbarToggle>("error-filter-toggle");
+        _criticalLevelFilterToggle = this.Q<ToolbarToggle>("critical-filter-toggle");
+        _traceLevelFilterToggle.RegisterValueChangedCallback(_ => UpdateFilteredLogEntries());
+        _debugLevelFilterToggle.RegisterValueChangedCallback(_ => UpdateFilteredLogEntries());
+        _infoLevelFilterToggle.RegisterValueChangedCallback(_ => UpdateFilteredLogEntries());
+        _warningLevelFilterToggle.RegisterValueChangedCallback(_ => UpdateFilteredLogEntries());
+        _errorLevelFilterToggle.RegisterValueChangedCallback(_ => UpdateFilteredLogEntries());
+        _criticalLevelFilterToggle.RegisterValueChangedCallback(_ => UpdateFilteredLogEntries());
+
+        RegisterCallback<AttachToPanelEvent>(_ =>
+        {
+            YesFrameworkLogger.Instance.OnLogEntityAdded += OnInstanceOnOnLogEntityAdded;
+        });
+
+        RegisterCallback<DetachFromPanelEvent>(_ =>
+        {
+            YesFrameworkLogger.Instance.OnLogEntityAdded -= OnInstanceOnOnLogEntityAdded;
+        });
+
+        UpdateFilteredLogEntries();
+    }
+
+    private void UpdateFilteredLogEntries()
+    {
+        _filteredLogEntries.Clear();
+
+        var result = _logEntries
+            .Where(log => (log.Level == YesLogLevel.Trace && _traceLevelFilterToggle.value) ||
+                          (log.Level == YesLogLevel.Debug && _debugLevelFilterToggle.value) ||
+                          (log.Level == YesLogLevel.Info && _infoLevelFilterToggle.value) ||
+                          (log.Level == YesLogLevel.Warning && _warningLevelFilterToggle.value) ||
+                          (log.Level == YesLogLevel.Error && _errorLevelFilterToggle.value) ||
+                          (log.Level == YesLogLevel.Critical && _criticalLevelFilterToggle.value))
+            .Where(log =>
+                log.FullMessage.Contains(_searchKeywordField.value, StringComparison.InvariantCultureIgnoreCase))
+            .ToArray();
+
+        _filteredLogEntries.AddRange(result);
+        _logListView.RefreshItems();
+    }
+
+    private void OnInstanceOnOnLogEntityAdded(object _, YesLogEntity entity)
+    {
+        _logEntries.Add(entity);
+
+        UpdateFilteredLogEntries();
     }
 
     private static string GetLogEntityDetails(YesLogEntity logEntity)
@@ -80,6 +146,11 @@ internal sealed class YesLoggingView : VisualElement
         if (logEntity.Exception is { } ex)
         {
             details += $"\nException:\n{ex}";
+        }
+
+        if (logEntity.Context != null)
+        {
+            details += $"\n\nContext: {logEntity.Context} (InstanceID: {logEntity.Context.GetInstanceID()})\n";
         }
 
         return details;

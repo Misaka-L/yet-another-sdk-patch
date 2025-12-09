@@ -29,10 +29,6 @@ internal sealed class YesLoggingListItem : VisualElement
         _levelLabel.text = _logEntity.Level.ToString();
         _levelLabel.AddToClassList(_logEntity.Level.ToString().ToLowerInvariant());
 
-        _messageLabel.text = _logEntity.Message;
-        if (_logEntity.Exception is not { } ex)
-            return;
-
-        _messageLabel.text += "\n" + ex.GetType().Name + ": " + ex.Message;
+        _messageLabel.text = _logEntity.FullMessage;
     }
 }

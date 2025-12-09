@@ -7,11 +7,31 @@
 
     <engine:Style src="YesLoggingView.uss" />
 
-    <engine:TwoPaneSplitView orientation="Vertical" fixed-pane-initial-dimension="150" fixed-pane-index="1">
-        <engine:ListView name="log-list-view" />
-        <engine:VisualElement class="selected-log-message-container">
-            <engine:Button name="ping-context-button" text="Ping Context Object" />
-            <engine:TextField name="selected-log-message-field" readonly="true" multiline="true" />
+    <engine:VisualElement class="logging-view-container">
+        <engine:VisualElement class="logging-filter-container">
+            <engine:Label text="Search Message" />
+            <engine:TextField name="logging-filter-keyword-field" />
+            <engine:VisualElement class="logging-filter-level-toggles">
+                <editor:ToolbarToggle name="trace-filter-toggle" text="Trace" value="true" />
+                <editor:ToolbarToggle name="debug-filter-toggle" text="Debug" value="true" />
+                <editor:ToolbarToggle name="info-filter-toggle" text="Info" value="true" />
+                <editor:ToolbarToggle name="warning-filter-toggle" text="Warning" value="true" />
+                <editor:ToolbarToggle name="error-filter-toggle" text="Error" value="true" />
+                <editor:ToolbarToggle name="critical-filter-toggle" text="Critical" value="true" />
+            </engine:VisualElement>
+            <engine:VisualElement class="logging-filter-action-container">
+                <editor:ToolbarToggle text="Scroll" />
+            </engine:VisualElement>
         </engine:VisualElement>
-    </engine:TwoPaneSplitView>
+        <engine:TwoPaneSplitView class="logging-panel" orientation="Vertical"
+                                 fixed-pane-initial-dimension="150" fixed-pane-index="1">
+            <engine:ListView name="log-list-view" />
+            <engine:VisualElement class="selected-log-message-container">
+                <engine:Button name="ping-context-button" text="Ping Context Object" />
+                <engine:ScrollView class="selected-log-message-scrollview">
+                    <engine:TextField name="selected-log-message-field" readonly="true" multiline="true" />
+                </engine:ScrollView>
+            </engine:VisualElement>
+        </engine:TwoPaneSplitView>
+    </engine:VisualElement>
 </engine:UXML>

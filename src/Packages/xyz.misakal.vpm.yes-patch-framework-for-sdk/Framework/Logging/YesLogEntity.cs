@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using YesPatchFrameworkForVRChatSdk.PatchApi.Logging;
 using Object = UnityEngine.Object;
 
@@ -13,6 +14,8 @@ internal class YesLogEntity
         Message = message;
         Exception = exception;
         Context = context;
+
+        FullMessage = GetMessage();
     }
 
     public YesLogLevel Level { get; }
@@ -20,5 +23,21 @@ internal class YesLogEntity
     public string Message { get; }
 
     public Exception? Exception { get; }
-    public UnityEngine.Object? Context { get; }
+    public Object? Context { get; }
+
+    public string FullMessage { get; }
+
+    private string GetMessage()
+    {
+        var stringBuilder = new StringBuilder();
+        stringBuilder.AppendLine(Message);
+
+        if (Exception is not null)
+            stringBuilder.AppendLine(Exception.ToString());
+
+        if (Context != null)
+            stringBuilder.AppendLine(Context.ToString());
+
+        return stringBuilder.ToString();
+    }
 }
