@@ -20,7 +20,7 @@
                 <editor:ToolbarToggle name="critical-filter-toggle" text="Critical" value="true" />
             </engine:VisualElement>
             <engine:VisualElement class="logging-filter-action-container">
-                <editor:ToolbarToggle text="Scroll" />
+                <editor:ToolbarToggle name="auto-scroll-toggle" text="Scroll" />
             </engine:VisualElement>
         </engine:VisualElement>
         <engine:TwoPaneSplitView class="logging-panel" orientation="Vertical"

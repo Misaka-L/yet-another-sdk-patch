@@ -28,6 +28,8 @@ internal sealed class YesLoggingView : VisualElement
     private readonly ToolbarToggle _errorLevelFilterToggle;
     private readonly ToolbarToggle _criticalLevelFilterToggle;
 
+    private readonly ToolbarToggle _autoScrollToggle;
+
     private YesLogEntity? _selectedLogEntity;
 
     public YesLoggingView()
@@ -98,6 +100,13 @@ internal sealed class YesLoggingView : VisualElement
         _errorLevelFilterToggle.RegisterValueChangedCallback(_ => UpdateFilteredLogEntries());
         _criticalLevelFilterToggle.RegisterValueChangedCallback(_ => UpdateFilteredLogEntries());
 
+        _autoScrollToggle = this.Q<ToolbarToggle>("auto-scroll-toggle");
+        _autoScrollToggle.RegisterValueChangedCallback(_ =>
+        {
+            if (_autoScrollToggle.value)
+                ScrollToBottom();
+        });
+
         RegisterCallback<AttachToPanelEvent>(_ =>
         {
             YesFrameworkLogger.Instance.OnLogEntityAdded += OnInstanceOnOnLogEntityAdded;
@@ -128,6 +137,19 @@ internal sealed class YesLoggingView : VisualElement
 
         _filteredLogEntries.AddRange(result);
         _logListView.RefreshItems();
+
+        if (_autoScrollToggle.value)
+            ScrollToBottom();
+    }
+
+    private void ScrollToBottom()
+    {
+        if (_filteredLogEntries.Count == 0)
+            return;
+
+        _logListView.schedule.Execute(_ =>
+            _logListView.ScrollToItem(_filteredLogEntries.Count - 1)
+        );
     }
 
     private void OnInstanceOnOnLogEntityAdded(object _, YesLogEntity entity)
