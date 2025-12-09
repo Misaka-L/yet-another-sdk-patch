@@ -17,5 +17,10 @@
     "patch",
     "patcher"
   ],
-  "vpmDependencies": {}
+  "vpmDependencies": {},
+  "legacyPackages": [
+    "cn.org.vrcd.vpm.vrchat-sdk-patcher",
+    "cn.org.vrcd.vpm.vrchat-sdk-patcher.worlds",
+    "cn.org.vrcd.vpm.vrchat-sdk-patcher.avatars"
+  ]
 }
