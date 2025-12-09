@@ -22,6 +22,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Always Agree Copyright Agreement Patch
   - Automatically agrees to the copyright agreement when uploading content.
 
+### Changes from [0.1.0-beta.2]
+
+#### Changed
+
+- Migrate to Yes! Patch Framework Logging system.
+
 ## [0.1.0-beta.2] - 2025-12-07
 
 ### Added

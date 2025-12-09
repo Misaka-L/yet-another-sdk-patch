@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Allow user to enable or disable patch.
   - Allow user check why patch or unpatch failed.
   - Allow user modify patch settings (if patch provided).
+- Logging system
+  - More Log Level: Trace, Debug, Info, Warning, Error, Critical.
+  - Logging View Window.
+  - Allow control min log level send to Unity Console.
 
 ### Changes from the [0.1.0-beta.1]
 

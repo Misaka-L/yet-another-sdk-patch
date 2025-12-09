@@ -1,0 +1,43 @@
+﻿.selected-log-message-container {
+    display: flex;
+}
+
+.selected-log-message-scrollview {
+    flex: 1;
+}
+
+.logging-view-container {
+    display: flex;
+    height: 100%;
+}
+
+.logging-filter-container {
+    flex: none;
+
+    display: flex;
+    flex-direction: row;
+
+    border-bottom-color: dimgray;
+    border-bottom-width: 1px;
+}
+
+#logging-filter-keyword-field {
+    flex: 1;
+}
+
+.logging-filter-level-toggles {
+    display: flex;
+    flex-direction: row;
+}
+
+.logging-panel {
+    flex: 1;
+}
+
+.logging-filter-action-container {
+    display: flex;
+    flex-direction: row;
+
+    border-left-color: dimgray;
+    border-left-width: 4px;
+}
