@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Allow request Cloudflare `/cdn-cgi/trace` endpoint in network resilience settings ui.
+- Allow request Cloudflare `/cdn-cgi/trace` endpoint in network resilience settings ui. [`#21`](https://github.com/project-vrcz/yet-another-sdk-patch/pull/21)
   - You can check your IP address use to send request to VRChat Services.
   - And all debug information inculde in Cloudflare trace endpoint. (e.g User-Agent, TLS version, Edge location)
 
