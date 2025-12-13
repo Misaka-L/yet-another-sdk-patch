@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changes
 
-- (BREAKING CHAGNE) Use SDK provided 0Harmony.dll instead of HarmonyX. [`#19`](https://github.com/project-vrcz/yet-another-sdk-patch/pull/19)
+- Use Framework provided 0Harmony.dll instead of HarmonyX. [`#22`](https://github.com/project-vrcz/yet-another-sdk-patch/pull/22) [`#19`](https://github.com/project-vrcz/yet-another-sdk-patch/pull/19)
 
 ## [0.2.0-beta.1] - 2025-12-11
 
