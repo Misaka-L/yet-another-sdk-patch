@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2025-12-18
+
 ### Changes
 
 - Use Harmony 2.4.2 instead of HarmonyX. [`#22`](https://github.com/project-vrcz/yet-another-sdk-patch/pull/22) [`#19`](https://github.com/project-vrcz/yet-another-sdk-patch/pull/19)
@@ -70,7 +72,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Allow user check why patch or unpatch failed.
   - Allow user modify patch settings (if patch provided).
 
-[unreleased]: https://github.com/project-vrcz/yet-another-sdk-patch/compare/framework-v0.2.0-beta.2...HEAD
+[unreleased]: https://github.com/project-vrcz/yet-another-sdk-patch/compare/framework-v0.2.0...HEAD
+[0.2.0]: https://github.com/project-vrcz/yet-another-sdk-patch/compare/framework-v0.2.0-beta.2...framework-v0.2.0
 [0.2.0-beta.2]: https://github.com/project-vrcz/yet-another-sdk-patch/compare/framework-v0.2.0-beta.1...framework-v0.2.0-beta.2
 [0.2.0-beta.1]: https://github.com/project-vrcz/yet-another-sdk-patch/compare/framework-v0.1.0...framework-v0.2.0-beta.1
 [0.1.0]: https://github.com/project-vrcz/yet-another-sdk-patch/compare/framework-v0.1.0-beta.1...framework-v0.1.0
