@@ -8,8 +8,11 @@
     <Style src="YesPatchListItem.uss" />
 
     <engine:VisualElement class="patch-item-container">
-        <engine:Toggle name="patch-toggle" />
-        <engine:Label name="patch-error-icon" text="X" tooltip="Patch Error" />
+        <engine:VisualElement class="patch-item-actions">
+            <engine:Toggle name="patch-toggle" />
+            <engine:Label name="patch-error-icon" text="X" tooltip="Patch Error" />
+            <engine:Image name="patch-have-settings-ui-icon" tooltip="This patch have a custom settings ui."/>
+        </engine:VisualElement>
         <engine:VisualElement>
             <engine:Label name="patch-id" text="Patch ID" />
             <engine:Label name="patch-display-name" text="Patch DisplayName" />
