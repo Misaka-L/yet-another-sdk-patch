@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Allow toggle wrap for log message text field. [`#26`](https://github.com/project-vrcz/yet-another-sdk-patch/pull/26)
+- Show icon in patch list item if patch have custom settings ui [`#27`](https://github.com/project-vrcz/yet-another-sdk-patch/pull/27)
 
 ## [0.2.0] - 2025-12-18
 
