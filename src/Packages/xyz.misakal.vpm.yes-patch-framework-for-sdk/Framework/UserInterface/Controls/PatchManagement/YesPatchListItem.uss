@@ -21,8 +21,20 @@
     padding: 8px 2px;
 }
 
+.patch-item-actions {
+    align-items: center;
+}
+
 #patch-error-icon {
     color: red;
     -unity-font-style: bold;
     font-size: 24px;
+}
+
+#patch-have-settings-ui-icon {
+    --unity-image: url("../../Assets/SettingsUiIcon.png");
+    --unity-image-size: stretch-to-fill;
+    
+    height: 16px;
+    width: 16px;
 }

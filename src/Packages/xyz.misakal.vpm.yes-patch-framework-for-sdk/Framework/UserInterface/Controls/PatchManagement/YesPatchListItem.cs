@@ -11,6 +11,7 @@ internal sealed class YesPatchListItem : VisualElement
 {
     private readonly Toggle patchToggle;
     private readonly VisualElement patchErrorIcon;
+    private readonly VisualElement patchHaveSettingsUiIocn;
 
     private readonly Label patchIdLabel;
     private readonly Label patchDisplayNameLabel;
@@ -32,12 +33,15 @@ internal sealed class YesPatchListItem : VisualElement
                 $"Failed to load YesPatchListItem UXML asset: YesPatchListItem.uxml ({VisualTreeAssetGuid})");
         tree.CloneTree(this);
 
+        patchHaveSettingsUiIocn = this.Q<VisualElement>("patch-have-settings-ui-icon");
         patchToggle = this.Q<Toggle>("patch-toggle");
         patchErrorIcon = this.Q<VisualElement>("patch-error-icon");
 
         patchIdLabel = this.Q<Label>("patch-id");
         patchDisplayNameLabel = this.Q<Label>("patch-display-name");
         patchDescriptionLabel = this.Q<Label>("patch-description");
+
+        patchHaveSettingsUiIocn.style.display = yesPatch.HasSettingsUi ? DisplayStyle.Flex : DisplayStyle.None;
 
         patchIdLabel.text = yesPatch.Id;
         patchIdLabel.tooltip = yesPatch.Id;
