@@ -28,7 +28,8 @@
             <engine:ListView name="log-list-view" />
             <engine:VisualElement class="selected-log-message-container">
                 <engine:Button name="ping-context-button" text="Ping Context Object" />
-                <engine:ScrollView class="selected-log-message-scrollview" mode="VerticalAndHorizontal">
+                <engine:Toggle name="message-wrap-toggle" text="Toggle Wrap" />
+                <engine:ScrollView name="log-message-scrollview" class="selected-log-message-scrollview" mode="VerticalAndHorizontal">
                     <engine:TextField name="selected-log-message-field" readonly="true" multiline="true" />
                 </engine:ScrollView>
             </engine:VisualElement>

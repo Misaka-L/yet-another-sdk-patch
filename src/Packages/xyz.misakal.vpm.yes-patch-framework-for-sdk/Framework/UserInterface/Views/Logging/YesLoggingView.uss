@@ -41,3 +41,7 @@
     border-left-color: dimgray;
     border-left-width: 4px;
 }
+
+#selected-log-message-field > * {
+    border-width: 0;
+}
