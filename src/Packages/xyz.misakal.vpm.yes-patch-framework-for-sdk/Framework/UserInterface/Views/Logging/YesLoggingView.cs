@@ -19,7 +19,9 @@ internal sealed class YesLoggingView : VisualElement
 
     private readonly ListView _logListView;
 
+    private readonly ScrollView _logMessageScrollView;
     private readonly Button _pingSelectedLogEntityContextButton;
+    private readonly Toggle _wrapMessageToggle;
     private readonly TextField _selectedLogDetailsTextField;
 
     private readonly TextField _searchKeywordField;
@@ -46,6 +48,8 @@ internal sealed class YesLoggingView : VisualElement
 
         _logListView = this.Q<ListView>("log-list-view");
         _selectedLogDetailsTextField = this.Q<TextField>("selected-log-message-field");
+        _logMessageScrollView = this.Q<ScrollView>("log-message-scrollview");
+        _wrapMessageToggle = this.Q<Toggle>("message-wrap-toggle");
         _pingSelectedLogEntityContextButton = this.Q<Button>("ping-context-button");
         _pingSelectedLogEntityContextButton.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
 
@@ -56,6 +60,17 @@ internal sealed class YesLoggingView : VisualElement
 
             EditorGUIUtility.PingObject(_selectedLogEntity.Context);
         };
+
+        _wrapMessageToggle.RegisterValueChangedCallback(args =>
+        {
+            _selectedLogDetailsTextField.style.whiteSpace = args.newValue
+                ? new StyleEnum<WhiteSpace>(WhiteSpace.Normal)
+                : new StyleEnum<WhiteSpace>(WhiteSpace.NoWrap);
+
+            _logMessageScrollView.mode = args.newValue
+                ? ScrollViewMode.Vertical
+                : ScrollViewMode.VerticalAndHorizontal;
+        });
 
         _logListView.itemsSource = _filteredLogEntries;
         _logListView.makeItem = () => new VisualElement();
