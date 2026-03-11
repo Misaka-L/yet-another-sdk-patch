@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
-using UnityEditor;
 using YesPatchFrameworkForVRChatSdk.PatchApi.Logging;
 
 namespace YesPatchFrameworkForVRChatSdk.PatchApi;
@@ -10,7 +9,7 @@ namespace YesPatchFrameworkForVRChatSdk.PatchApi;
 public static class PatchSettingsHelper
 {
     private const string FolderName = "YesPatchFrameworkForVRChatSdk";
-    private const string FolderPath = "Assets/" + FolderName;
+    private const string FolderPath = "ProjectSettings/" + FolderName;
 
     public static string CreateSettingsFolderIfNotExists(string patchSettingsId)
     {
@@ -18,13 +17,14 @@ public static class PatchSettingsHelper
         if (patchSettingsId.Any(c => invalidChars.Contains(c)))
             throw new ArgumentException("The patchSettingsId contains invalid characters.", nameof(patchSettingsId));
 
-        if (!AssetDatabase.IsValidFolder(FolderPath))
-            AssetDatabase.CreateFolder("Assets", FolderName);
+        if (!Directory.Exists(FolderPath))
+            Directory.CreateDirectory(FolderPath);
 
-        if (!AssetDatabase.IsValidFolder(FolderPath + "/" + patchSettingsId))
-            AssetDatabase.CreateFolder(FolderPath, patchSettingsId);
+        var settingsFolderPath = Path.Combine(FolderPath, patchSettingsId);
+        if (!Directory.Exists(settingsFolderPath))
+            Directory.CreateDirectory(settingsFolderPath);
 
-        return FolderPath + "/" + patchSettingsId;
+        return settingsFolderPath;
     }
 
     public static string CreateSettingsFolderIfNotExists(string patchSettingsId, string settingsFileName)
