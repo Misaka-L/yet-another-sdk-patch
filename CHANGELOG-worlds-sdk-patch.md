@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Main thread check for Udon Profiler. [`#39`](https://github.com/project-vrcz/yet-another-sdk-patch/pull/39)
+
 ## [0.3.0] - 2026-03-12
 
 ### Changed
