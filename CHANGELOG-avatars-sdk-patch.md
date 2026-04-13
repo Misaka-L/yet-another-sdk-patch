@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Fix parameter driver editor always spawn animator window patch. [`#40`](https://github.com/project-vrcz/yet-another-sdk-patch/pull/40)
+  - If you exit play mode when avatar parameter driver editor visible, it will keep spawn animator window when domain reload in some case.
+
 ## [0.3.0] - 2026-03-12
 
 ### Changed
