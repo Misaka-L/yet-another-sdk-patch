@@ -1,14 +1,15 @@
-﻿using System;
+﻿using HarmonyLib;
+using YesPatchFrameworkForVRChatSdk.PatchApi;
+
+#if !YAP4VRC_VRCFURY_EXIST
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
-using HarmonyLib;
-using JetBrains.Annotations;
-using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
-using YesPatchFrameworkForVRChatSdk.PatchApi;
 using YesPatchFrameworkForVRChatSdk.PatchApi.Logging;
+#endif
 
 namespace YetAnotherPatchForVRChatSdk.Avatars.Patches;
 
@@ -27,6 +28,7 @@ internal sealed class ParameterDriverEditorAlwaysSpawnAnimatorWindowPatch : YesP
 
     public override string DisplayName => "Fix Parameter Driver Editor Always Spawn Animator Window";
 
+#if !YAP4VRC_VRCFURY_EXIST
     private readonly Harmony _harmony =
         new("xyz.misakal.vpm.yet-another-sdk-patch.avatars.parameter-driver-editor-always-spawn-animator-window");
 
@@ -75,4 +77,16 @@ internal sealed class ParameterDriverEditorAlwaysSpawnAnimatorWindowPatch : YesP
         __result = _animatorControllerPropertyInfo.GetValue(animatorWindows.First(), null) as AnimatorController;
         return false;
     }
+
+#else
+
+    public override void Patch()
+    {
+    }
+
+    public override void UnPatch()
+    {
+    }
+
+#endif
 }

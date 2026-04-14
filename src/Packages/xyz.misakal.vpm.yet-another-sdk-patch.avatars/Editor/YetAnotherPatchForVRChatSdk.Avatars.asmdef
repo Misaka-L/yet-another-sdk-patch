@@ -27,6 +27,11 @@
             "name": "com.vrchat.avatars",
             "expression": "3.10.1",
             "define": "YAP4VRC_VRCHAT_AVATARS_3_10_1_OR_NEWER"
+        },
+        {
+            "name": "com.vrcfury.vrcfury",
+            "expression": "",
+            "define": "YAP4VRC_VRCFURY_EXIST"
         }
     ],
     "noEngineReferences": false
